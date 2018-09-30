@@ -18,21 +18,26 @@ func main() {
 	app.Usage = "migrate among the clouds"
 	app.Commands = []cli.Command{
 		{
-			Name:    "transaction",
-			Aliases: []string{"trans", "t"},
-			Usage:   "commands to manipulate snapshots",
+			Name:    "change",
+			Aliases: []string{"c"},
+			Usage:   "commands to manipulate change sets",
 			Subcommands: []cli.Command{
 				{
 					Name:    "apply",
 					Aliases: []string{"a"},
-					Usage:   "Apply a transaction to the specified environment",
+					Usage:   "Apply a transaction to the specified environment (implicitly sets the mark)",
 					Action:  notImplemented,
 				},
 				{
 					Name:    "create",
 					Aliases: []string{"c"},
-					Usage:   "Create a transaction from the specified environment",
+					Usage:   "Create a change set of all changes since the last mark",
 					Action:  notImplemented,
+				},
+				{
+					Name:    "mark",
+					Aliases: []string{"m"},
+					Usage:   "Mark the start of a new change.",
 				},
 			},
 		},
@@ -40,10 +45,10 @@ func main() {
 
 	app.Flags = []cli.Flag{
 		cli.StringFlag{
-			Name: "context",
+			Name:  "context",
 			Value: "default",
 			Usage: "Kubernetes context to operate on",
-		}
+		},
 	}
 
 	err := app.Run(os.Args)
