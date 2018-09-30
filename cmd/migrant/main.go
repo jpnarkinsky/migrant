@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/jpnarkinsky/migrant"
 	"github.com/urfave/cli"
 )
 
@@ -15,6 +16,7 @@ func notImplemented(c *cli.Context) error {
 func main() {
 	app := cli.NewApp()
 	app.Name = "migrant"
+	app.Version = migrant.Version
 	app.Usage = "migrate among the clouds"
 	app.Commands = []cli.Command{
 		{
@@ -23,21 +25,24 @@ func main() {
 			Usage:   "commands to manipulate change sets",
 			Subcommands: []cli.Command{
 				{
-					Name:    "apply",
-					Aliases: []string{"a"},
-					Usage:   "Apply a transaction to the specified environment (implicitly sets the mark)",
-					Action:  notImplemented,
+					Name:   "apply",
+					Usage:  "Apply a transaction to the specified environment (sets the mark after the change is applied)",
+					Action: notImplemented,
 				},
 				{
-					Name:    "create",
-					Aliases: []string{"c"},
-					Usage:   "Create a change set of all changes since the last mark",
-					Action:  notImplemented,
+					Name:   "mark",
+					Usage:  "Mark the start of a new change.",
+					Action: notImplemented,
 				},
 				{
-					Name:    "mark",
-					Aliases: []string{"m"},
-					Usage:   "Mark the start of a new change.",
+					Name:   "save",
+					Usage:  "Save the current change",
+					Action: notImplemented,
+				},
+				{
+					Name:   "status",
+					Usage:  "See the current status of the changeset",
+					Action: notImplemented,
 				},
 			},
 		},
